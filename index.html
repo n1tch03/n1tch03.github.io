@@ -15,6 +15,8 @@
             --tab-bg: #333;
             --tab-active: #bb86fc;
             --section-bg: #252525;
+            --glass-effect: rgba(30, 30, 30, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
         
         .light-theme {
@@ -27,6 +29,8 @@
             --tab-bg: #f1f1f1;
             --tab-active: #6200ee;
             --section-bg: #f9f9f9;
+            --glass-effect: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(0, 0, 0, 0.1);
         }
         
         body {
@@ -37,6 +41,10 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background-color 0.3s, color 0.3s;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(187, 134, 252, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(187, 134, 252, 0.1) 0%, transparent 50%);
+            background-attachment: fixed;
         }
         
         .container {
@@ -44,11 +52,14 @@
             margin: 0 auto;
             padding: 20px;
             background-color: var(--container-color);
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
-            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            border-radius: 15px;
             margin-top: 30px;
             margin-bottom: 30px;
             transition: background-color 0.3s;
+            backdrop-filter: blur(10px);
+            background: var(--glass-effect);
+            border: 1px solid var(--glass-border);
         }
         
         header {
@@ -60,12 +71,26 @@
         h1 {
             color: var(--accent-color);
             margin-bottom: 5px;
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
         h2, h3, h4 {
             color: var(--accent-color);
             position: relative;
             padding-left: 15px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            margin-top: 25px;
         }
         
         h2::before, h3::before {
@@ -75,7 +100,7 @@
             top: 50%;
             transform: translateY(-50%);
             width: 5px;
-            height: 20px;
+            height: 25px;
             background-color: var(--accent-color);
             border-radius: 3px;
         }
@@ -85,20 +110,20 @@
             margin-bottom: 20px;
             border-bottom: 1px solid var(--border-color);
             flex-wrap: wrap;
+            gap: 5px;
         }
         
         .tab {
-            padding: 10px 20px;
+            padding: 12px 24px;
             cursor: pointer;
             background-color: var(--tab-bg);
             border: none;
             outline: none;
             transition: all 0.3s ease;
             font-size: 16px;
-            border-radius: 5px 5px 0 0;
-            margin-right: 5px;
-            margin-bottom: 5px;
+            border-radius: 8px 8px 0 0;
             color: var(--text-color);
+            font-weight: 500;
         }
         
         .tab:hover {
@@ -108,8 +133,9 @@
         
         .tab.active {
             background-color: var(--tab-active);
-            color: var(--container-color);
+            color: white;
             font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         
         .tab-content {
@@ -117,9 +143,11 @@
             padding: 25px;
             border: 1px solid var(--border-color);
             border-top: none;
-            border-radius: 0 0 10px 10px;
+            border-radius: 0 0 15px 15px;
             animation: fadeEffect 0.5s;
             background-color: var(--container-color);
+            backdrop-filter: blur(10px);
+            background: var(--glass-effect);
         }
         
         @keyframes fadeEffect {
@@ -139,7 +167,8 @@
         li {
             margin-bottom: 12px;
             position: relative;
-            padding-left: 25px;
+            padding-left: 30px;
+            font-size: 1.05rem;
         }
         
         li::before {
@@ -148,6 +177,7 @@
             left: 0;
             color: var(--accent-color);
             font-weight: bold;
+            font-size: 1.2rem;
         }
         
         a {
@@ -155,6 +185,7 @@
             text-decoration: none;
             transition: all 0.3s ease;
             position: relative;
+            font-weight: 500;
         }
         
         a:hover {
@@ -182,6 +213,7 @@
             font-style: italic;
             color: var(--text-color);
             opacity: 0.7;
+            font-size: 0.95rem;
         }
         
         .info p {
@@ -189,40 +221,53 @@
             padding-left: 15px;
             margin-left: 5px;
             transition: border-color 0.3s;
+            font-size: 1.05rem;
+            margin-bottom: 15px;
         }
         
         /* CV section styles */
         .cv-section {
             background-color: var(--section-bg);
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 12px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            background: var(--glass-effect);
+            border: 1px solid var(--glass-border);
         }
         
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 15px;
             margin-top: 15px;
         }
         
         .skill-category {
             background-color: var(--container-color);
-            padding: 15px;
-            border-radius: 6px;
-            border-left: 3px solid var(--accent-color);
+            padding: 18px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-3px);
         }
         
         .skill-category h4 {
             margin-top: 0;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
         }
         
         .skill-item {
             margin-bottom: 8px;
             display: flex;
             align-items: center;
+            font-size: 0.95rem;
         }
         
         .skill-item::before {
@@ -297,11 +342,55 @@
             font-size: 18px;
         }
         
+        /* Floating particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float linear infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+        
+        /* Mobile styles */
         @media (max-width: 768px) {
             .container {
                 margin-top: 15px;
                 margin-bottom: 15px;
                 padding: 15px;
+                border-radius: 10px;
+                width: 95%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+                margin-top: 10px;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.2rem;
             }
             
             .tabs {
@@ -309,8 +398,9 @@
             }
             
             .tab {
-                padding: 8px 15px;
+                padding: 10px 15px;
                 font-size: 14px;
+                border-radius: 6px 6px 0 0;
             }
             
             .switchers-container {
@@ -324,10 +414,38 @@
             .skills-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .tab-content {
+                padding: 15px;
+            }
+            
+            li {
+                font-size: 1rem;
+                padding-left: 25px;
+            }
+        }
+        
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            .container {
+                padding: 12px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .tab {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Floating particles background -->
+    <div class="particles" id="particles"></div>
+    
     <div class="container">
         <header>
             <h1>👋 <span data-i18n="greeting">Hi, I'm nitch</span></h1>
@@ -341,12 +459,12 @@
                     <span class="lang-icon">ru</span>
                 </div>
                 <div class="theme-switcher">
-                    <span class="theme-icon">🌙</span>
+                    <span class="theme-icon">☀️</span>
                     <label class="theme-switch">
                         <input type="checkbox" onclick="toggleTheme()">
                         <span class="theme-slider"></span>
                     </label>
-                    <span class="theme-icon">☀️</span>
+                    <span class="theme-icon">🌙</span>
                 </div>
             </div>
         </header>
@@ -653,6 +771,44 @@
             // Save theme preference to localStorage
             const isLight = document.body.classList.contains("light-theme");
             localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            
+            // Update particles color
+            createParticles();
+        }
+        
+        // Floating particles effect
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            particlesContainer.innerHTML = '';
+            
+            const particleCount = window.innerWidth < 768 ? 20 : 50;
+            const particleColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color');
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size between 2px and 6px
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation duration between 10s and 30s
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // Random delay
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                // Set color
+                particle.style.backgroundColor = particleColor;
+                
+                particlesContainer.appendChild(particle);
+            }
         }
         
         // Check for saved preferences when page loads
@@ -665,8 +821,8 @@
             if (savedTheme === 'light') {
                 document.body.classList.add('light-theme');
                 themeToggle.checked = true;
-                themeIcons[0].textContent = '🌙';
-                themeIcons[1].textContent = '☀️';
+                themeIcons[0].textContent = '☀️';
+                themeIcons[1].textContent = '🌙';
             } else {
                 themeIcons[0].textContent = '☀️';
                 themeIcons[1].textContent = '🌙';
@@ -679,7 +835,13 @@
             // Set language switch position
             const langSwitch = document.querySelector('.lang-switch input');
             langSwitch.checked = (savedLang === 'ru');
+            
+            // Create particles
+            createParticles();
         });
+        
+        // Handle window resize
+        window.addEventListener('resize', createParticles);
     </script>
 </body>
 </html>
