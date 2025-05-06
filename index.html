@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>nitch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #121212;
@@ -34,7 +37,7 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'JetBrains Mono', monospace;
             line-height: 1.6;
             margin: 0;
             padding: 0;
@@ -45,6 +48,14 @@
                 radial-gradient(circle at 25% 25%, rgba(187, 134, 252, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 75% 75%, rgba(187, 134, 252, 0.1) 0%, transparent 50%);
             background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-weight: 400;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
         }
         
         .container {
@@ -74,6 +85,7 @@
             font-size: 2.5rem;
             font-weight: 600;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            letter-spacing: -0.5px;
         }
         
         h2, h3, h4 {
@@ -498,7 +510,7 @@
         </div>
 
         <div id="nontech" class="tab-content">
-            <h2 data-i18n="nontechHeader">Non-technical literature (which I recommend reading)</h2>
+            <h2 data-i18n="nontechHeader">Non-technical literature</h2>
             <ul>
                 <li><strong data-i18n="nontech1">To kill a Mockingbird</strong> - Harper Lee</li>
                 <li><strong data-i18n="nontech2">Twenty thousand leagues under the seas</strong> - Jules Verne</li>
@@ -609,7 +621,7 @@
                 tech6: "Algorithms",
                 tech7: "Building your Linux distribution",
                 tech8: "Physics",
-                nontechHeader: "Non-technical literature (which I recommend reading)",
+                nontechHeader: "Non-technical literature",
                 nontech1: "To kill a Mockingbird",
                 nontech2: "Twenty thousand leagues under the seas",
                 nontech3: "The Mysterious Island",
@@ -664,7 +676,7 @@
                 tech6: "Алгоритмы",
                 tech7: "Создание своего дистрибутива Linux",
                 tech8: "Физика",
-                nontechHeader: "Не техническая литература (которую я рекомендую к прочтению)",
+                nontechHeader: "Не техническая литература",
                 nontech1: "Убить пересмешника",
                 nontech2: "Двадцать тысяч льё под водой",
                 nontech3: "Таинственный остров",
