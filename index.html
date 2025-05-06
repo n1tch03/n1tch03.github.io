@@ -232,30 +232,36 @@
             font-size: 20px;
         }
         
-        /* New theme switcher */
-        .theme-switcher-container {
+        /* Theme and language switcher */
+        .switchers-container {
             position: absolute;
             top: 0;
             right: 0;
             display: flex;
             align-items: center;
+            gap: 15px;
+        }
+        
+        .theme-switcher, .lang-switcher {
+            display: flex;
+            align-items: center;
             gap: 10px;
         }
         
-        .theme-switch {
+        .theme-switch, .lang-switch {
             position: relative;
             display: inline-block;
             width: 50px;
             height: 24px;
         }
         
-        .theme-switch input {
+        .theme-switch input, .lang-switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
         
-        .theme-slider {
+        .theme-slider, .lang-slider {
             position: absolute;
             cursor: pointer;
             top: 0;
@@ -267,7 +273,7 @@
             border-radius: 24px;
         }
         
-        .theme-slider:before {
+        .theme-slider:before, .lang-slider:before {
             position: absolute;
             content: "";
             height: 16px;
@@ -279,15 +285,15 @@
             border-radius: 50%;
         }
         
-        input:checked + .theme-slider {
+        input:checked + .theme-slider, input:checked + .lang-slider {
             background-color: var(--accent-color);
         }
         
-        input:checked + .theme-slider:before {
+        input:checked + .theme-slider:before, input:checked + .lang-slider:before {
             transform: translateX(26px);
         }
         
-        .theme-icon {
+        .theme-icon, .lang-icon {
             font-size: 18px;
         }
         
@@ -307,10 +313,12 @@
                 font-size: 14px;
             }
             
-            .theme-switcher-container {
+            .switchers-container {
                 position: static;
                 justify-content: center;
                 margin-top: 15px;
+                flex-direction: column;
+                gap: 10px;
             }
             
             .skills-grid {
@@ -322,139 +330,291 @@
 <body>
     <div class="container">
         <header>
-            <h1>👋 Hi, I'm nitch</h1>
-            <div class="theme-switcher-container">
-                <span class="theme-icon">🌙</span>
-                <label class="theme-switch">
-                    <input type="checkbox" onclick="toggleTheme()">
-                    <span class="theme-slider"></span>
-                </label>
-                <span class="theme-icon">☀️</span>
+            <h1>👋 <span data-i18n="greeting">Hi, I'm nitch</span></h1>
+            <div class="switchers-container">
+                <div class="lang-switcher">
+                    <span class="lang-icon">en</span>
+                    <label class="lang-switch">
+                        <input type="checkbox" onclick="toggleLanguage()">
+                        <span class="lang-slider"></span>
+                    </label>
+                    <span class="lang-icon">ru</span>
+                </div>
+                <div class="theme-switcher">
+                    <span class="theme-icon">🌙</span>
+                    <label class="theme-switch">
+                        <input type="checkbox" onclick="toggleTheme()">
+                        <span class="theme-slider"></span>
+                    </label>
+                    <span class="theme-icon">☀️</span>
+                </div>
             </div>
         </header>
 
         <div class="info">
-            <p>👀 I'm interested in self-development</p>
-            <p>🌱 I'm currently studying almost everything - low-level programming languages, operating systems, computer architecture, physics, and more</p>
-            <p>📫 If you want to contact me, write to me in the discord: n1tch03</p>
-            <p>🌚 My github: <a href="https://github.com/n1tch03" target="_blank">@n1tch03</a></p>
+            <p><span data-i18n="interest">👀 I'm interested in self-development</span></p>
+            <p><span data-i18n="studying">🌱 I'm currently studying almost everything - low-level programming languages, operating systems, computer architecture, physics, and more</span></p>
+            <p><span data-i18n="contact">📫 If you want to contact me, write to me in the discord: n1tch03</span></p>
+            <p><span data-i18n="github">🌚 My github:</span> <a href="https://github.com/n1tch03" target="_blank">@n1tch03</a></p>
         </div>
 
         <div class="tabs">
-            <button class="tab active" onclick="openTab(event, 'tech')">Technical Literature</button>
-            <button class="tab" onclick="openTab(event, 'nontech')">Non-Tech Literature</button>
-            <button class="tab" onclick="openTab(event, 'links')">Useful Links</button>
-            <button class="tab" onclick="openTab(event, 'cv')">Skills</button>
+            <button class="tab active" onclick="openTab(event, 'tech')" data-i18n="techTab">Technical Literature</button>
+            <button class="tab" onclick="openTab(event, 'nontech')" data-i18n="nontechTab">Non-Tech Literature</button>
+            <button class="tab" onclick="openTab(event, 'links')" data-i18n="linksTab">Useful Links</button>
+            <button class="tab" onclick="openTab(event, 'cv')" data-i18n="skillsTab">Skills</button>
         </div>
 
         <div id="tech" class="tab-content show">
-            <h2>Technical Literature</h2>
+            <h2 data-i18n="techHeader">Technical Literature</h2>
             <ul>
-                <li><strong>The entire programming base</strong> – Андрей Столяров, Программирование: Введение в профессию</li>
-                <li><strong>C programming language</strong> - Brian Kernighan, Dennis Ritchie</li>
-                <li><strong>Patterns</strong> - Ralph Johnson, John Vlissides, Richard Helm, Erich Gamma, Patterns of object-oriented design</li>
-                <li><strong>C++ Programming Language</strong> - Bjarne Straustrup (Programming principles and Practice Using C++, The C++ Programming Language)</li>
-                <li><strong>Operating systems, computer architecture, networks</strong> - Andrew Tanenbaum</li>
-                <li><strong>Grokking Algorithms</strong> – Aditya Bhargava</li>
-                <li><strong>Building your Linux distribution</strong> – Linux From Scratch</li>
-                <li><strong>Physics</strong> – Ландсберг, Элементарный учебник по физике; Richard Feynman, The Feynman Lectures on Physics</li>
+                <li><strong data-i18n="tech1">The entire programming base</strong> – Андрей Столяров, Программирование: Введение в профессию</li>
+                <li><strong data-i18n="tech2">C programming language</strong> - Brian Kernighan, Dennis Ritchie</li>
+                <li><strong data-i18n="tech3">Patterns</strong> - Ralph Johnson, John Vlissides, Richard Helm, Erich Gamma, Patterns of object-oriented design</li>
+                <li><strong data-i18n="tech4">C++ Programming Language</strong> - Bjarne Straustrup (Programming principles and Practice Using C++, The C++ Programming Language)</li>
+                <li><strong data-i18n="tech5">Operating systems, computer architecture, networks</strong> - Andrew Tanenbaum</li>
+                <li><strong data-i18n="tech6">Algorithms</strong> – Grokking Algorithms, Aditya Bhargava</li>
+                <li><strong data-i18n="tech7">Building your Linux distribution</strong> – Linux From Scratch</li>
+                <li><strong data-i18n="tech8">Physics</strong> – Ландсберг, Элементарный учебник по физике; Richard Feynman, The Feynman Lectures on Physics</li>
             </ul>
         </div>
 
         <div id="nontech" class="tab-content">
-            <h2>Non-technical literature (which I recommend reading)</h2>
+            <h2 data-i18n="nontechHeader">Non-technical literature (which I recommend reading)</h2>
             <ul>
-                <li><strong>To kill a Mockingbird</strong> - Harper Lee</li>
-                <li><strong>Twenty thousand leagues under the seas</strong> - Jules Verne</li>
-                <li><strong>The Mysterious Island</strong> - Jules Verne</li>
-                <li><strong>Captain Grant's children</strong> - Jules Verne</li>
+                <li><strong data-i18n="nontech1">To kill a Mockingbird</strong> - Harper Lee</li>
+                <li><strong data-i18n="nontech2">Twenty thousand leagues under the seas</strong> - Jules Verne</li>
+                <li><strong data-i18n="nontech3">The Mysterious Island</strong> - Jules Verne</li>
+                <li><strong data-i18n="nontech4">Captain Grant's children</strong> - Jules Verne</li>
                 <li><strong>Горе от ума</strong> - А.С. Грибоедов</li>
                 <li><strong>Как начать новую жизнь в понедельник и не бросить во вторник</strong></li>
                 <li><strong>Как начать думать в понедельник и не перестать во вторник</strong></li>
                 <li><strong>Быть нельзя казаться</strong></li>
-                <li><strong>The Black Swan: The Impact of the Highly Improbable</strong> - Nassim Nicholas Taleb</li>
+                <li><strong data-i18n="nontech5">The Black Swan: The Impact of the Highly Improbable</strong> - Nassim Nicholas Taleb</li>
             </ul>
         </div>
 
         <div id="links" class="tab-content">
-            <h2>Useful Links</h2>
+            <h2 data-i18n="linksHeader">Useful Links</h2>
             
             <h3>C++</h3>
             <ul>
-                <li><a href="https://www.youtube.com/playlist?list=PLmSYEYYGhnBviRYhIDty-CSTDS16a3whl" target="_blank">Lectures on C++ advanced flow,MIPT</a></li>
-                <li><a href="https://www.youtube.com/playlist?list=PL3BR09unfgciJ1_K_E914nohpiOiHnpsK" target="_blank">C++ basic course, MIPT</a></li>
-                <li><a href="https://www.youtube.com/playlist?list=PL3BR09unfgcgf7R88ZQRQqWOdLy4pRW2h" target="_blank">C++ Master's course, MIPT</a></li>
+                <li><a href="https://www.youtube.com/playlist?list=PLmSYEYYGhnBviRYhIDty-CSTDS16a3whl" target="_blank" data-i18n="links1">Lectures on C++ advanced flow,MIPT</a></li>
+                <li><a href="https://www.youtube.com/playlist?list=PL3BR09unfgciJ1_K_E914nohpiOiHnpsK" target="_blank" data-i18n="links2">C++ basic course, MIPT</a></li>
+                <li><a href="https://www.youtube.com/playlist?list=PL3BR09unfgcgf7R88ZQRQqWOdLy4pRW2h" target="_blank" data-i18n="links3">C++ Master's course, MIPT</a></li>
             </ul>
 
             <h3>C</h3>
             <ul>
-                <li><a href="https://www.youtube.com/playlist?list=PL3BR09unfgchRxdDws74aY4mlSk9eYGEs" target="_blank">C Language Practice</a></li>
-                <li><a href="https://www.youtube.com/playlist?list=PLA0M1Bcd0w8w-mqVmBjt-2J8Z1gVmPZVz" target="_blank">C Programming</a></li>
+                <li><a href="https://www.youtube.com/playlist?list=PL3BR09unfgchRxdDws74aY4mlSk9eYGEs" target="_blank" data-i18n="links4">C Language Practice</a></li>
+                <li><a href="https://www.youtube.com/playlist?list=PLA0M1Bcd0w8w-mqVmBjt-2J8Z1gVmPZVz" target="_blank" data-i18n="links5">C Programming</a></li>
             </ul>
 
-            <h3>Assembler</h3>
+            <h3 data-i18n="assemblerHeader">Assembler</h3>
             <ul>
-                <li><a href="https://www.youtube.com/playlist?list=PLlheCABZdy3P1OUheSoV4CeRvna5kleB-" target="_blank">Assembler Course</a></li>
+                <li><a href="https://www.youtube.com/playlist?list=PLlheCABZdy3P1OUheSoV4CeRvna5kleB-" target="_blank" data-i18n="links6">Assembler Course</a></li>
             </ul>
 
-            <h3>Computer architecture and OS</h3>
+            <h3 data-i18n="archHeader">Computer architecture and OS</h3>
             <ul>
-                <li><a href="https://youtube.com/playlist?list=PLnseyzyGdZdfv8H7LkvyVVE33fbBZaSdH" target="_blank">Computer Architecture</a></li>
-                <li><a href="https://www.youtube.com/playlist?list=PL-_cKNuVAYAV5FX84ZRvFN2ICTuQWBOJB" target="_blank">Computer architecture and OS basics</a></li>
-                <li><a href="https://www.youtube.com/playlist?list=PLlb7e2G7aSpT4SMpYl6uVYi13k0k9CBiq" target="_blank">OS Architecture</a></li>
+                <li><a href="https://youtube.com/playlist?list=PLnseyzyGdZdfv8H7LkvyVVE33fbBZaSdH" target="_blank" data-i18n="links7">Computer Architecture</a></li>
+                <li><a href="https://www.youtube.com/playlist?list=PL-_cKNuVAYAV5FX84ZRvFN2ICTuQWBOJB" target="_blank" data-i18n="links8">Computer architecture and OS basics</a></li>
+                <li><a href="https://www.youtube.com/playlist?list=PLlb7e2G7aSpT4SMpYl6uVYi13k0k9CBiq" target="_blank" data-i18n="links9">OS Architecture</a></li>
             </ul>
 
-            <h3>More</h3>
+            <h3 data-i18n="moreHeader">More</h3>
             <ul>
-                <li><a href="http://youtube.com/playlist?list=PLEqoHzpnmTfBlJGjG_2QqKRrXG36TkjNB" target="_blank">Industrial Development Tools</a></li>
-                <li><a href="https://www.youtube.com/@VladimirMozhenkov/playlists" target="_blank">Computer science</a></li>
-                <li><a href="https://www.youtube.com/@dudvstud9081/playlists" target="_blank">All mathematics</a></li>
-                <li><a href="https://docs.google.com/document/d/1U-XBUSU1PMwn7DL_nks2nUmyPSiDDdSpmTF9Ec_7MSU/edit?tab=t.0" target="_blank">Data structures and algorithms</a></li>
-                <li><a href="https://www.youtube.com/watch?v=Sy_wba7l1UU&list=PLawfWYMUziZqyUL5QDLVbe3j5BKWj42E5" target="_blank">CS50 in Russian</a></li>
-                <li><a href="https://www.youtube.com/watch?v=3LPJfIKxwWc&list=PLhQjrBD2T381WAHyx1pq-sBfykqMBI7V4" target="_blank">CS50 in English</a></li>
-
+                <li><a href="http://youtube.com/playlist?list=PLEqoHzpnmTfBlJGjG_2QqKRrXG36TkjNB" target="_blank" data-i18n="links10">Industrial Development Tools</a></li>
+                <li><a href="https://www.youtube.com/@VladimirMozhenkov/playlists" target="_blank" data-i18n="links11">Computer science</a></li>
+                <li><a href="https://www.youtube.com/@dudvstud9081/playlists" target="_blank" data-i18n="links12">All mathematics</a></li>
+                <li><a href="https://docs.google.com/document/d/1U-XBUSU1PMwn7DL_nks2nUmyPSiDDdSpmTF9Ec_7MSU/edit?tab=t.0" target="_blank" data-i18n="links13">Data structures and algorithms</a></li>
+                <li><a href="https://www.youtube.com/watch?v=Sy_wba7l1UU&list=PLawfWYMUziZqyUL5QDLVbe3j5BKWj42E5" target="_blank" data-i18n="links14">CS50 in Russian</a></li>
+                <li><a href="https://www.youtube.com/watch?v=3LPJfIKxwWc&list=PLhQjrBD2T381WAHyx1pq-sBfykqMBI7V4" target="_blank" data-i18n="links15">CS50 in English</a></li>
             </ul>
         </div>
 
         <div id="cv" class="tab-content">
-            <h2>Skills</h2>
+            <h2 data-i18n="skillsHeader">Skills</h2>
             
             <div class="cv-section">
                 <div class="skills-grid">
                     <div class="skill-category">
-                        <h4>Programming Languages</h4>
+                        <h4 data-i18n="skill1">Programming Languages</h4>
                         <div class="skill-item">C</div>
                         <div class="skill-item">C++</div>
-                        <div class="skill-item">Assembly</div>
+                        <div class="skill-item" data-i18n="skill2">Assembly</div>
                     </div>
                     
                     <div class="skill-category">
-                        <h4>Systems Programming</h4>
-                        <div class="skill-item">Operating Systems</div>
-                        <div class="skill-item">Computer Architecture</div>
-                        <div class="skill-item">Low-level Optimization</div>
-                        <div class="skill-item">Memory Management</div>
+                        <h4 data-i18n="skill3">Systems Programming</h4>
+                        <div class="skill-item" data-i18n="skill4">Operating Systems</div>
+                        <div class="skill-item" data-i18n="skill5">Computer Architecture</div>
+                        <div class="skill-item" data-i18n="skill6">Low-level Optimization</div>
+                        <div class="skill-item" data-i18n="skill7">Memory Management</div>
                     </div>
                     
                     <div class="skill-category">
-                        <h4>Development Tools</h4>
+                        <h4 data-i18n="skill8">Development Tools</h4>
                         <div class="skill-item">Linux</div>
                         <div class="skill-item">Git</div>
                         <div class="skill-item">GDB</div>
                         <div class="skill-item">Make/CMake</div>
                     </div>
-                    
-                    
                 </div>
             </div>
         </div>
 
         <div class="contact">
-            <p>For any questions, contact me on Discord: n1tch03</p>
+            <p data-i18n="contactFooter">For any questions, contact me on Discord: n1tch03</p>
         </div>
     </div>
 
     <script>
+        // Language translations
+        const translations = {
+            en: {
+                greeting: "Hi, I'm nitch",
+                interest: "👀 I'm interested in self-development",
+                studying: "🌱 I'm currently studying almost everything - low-level programming languages, operating systems, computer architecture, physics, and more",
+                contact: "📫 If you want to contact me, write to me in the discord: n1tch03",
+                github: "🌚 My github:",
+                techTab: "Technical Literature",
+                nontechTab: "Non-Tech Literature",
+                linksTab: "Useful Links",
+                skillsTab: "Skills",
+                techHeader: "Technical Literature",
+                tech1: "The entire programming base",
+                tech2: "C programming language",
+                tech3: "Patterns",
+                tech4: "C++ Programming Language",
+                tech5: "Operating systems, computer architecture, networks",
+                tech6: "Algorithms",
+                tech7: "Building your Linux distribution",
+                tech8: "Physics",
+                nontechHeader: "Non-technical literature (which I recommend reading)",
+                nontech1: "To kill a Mockingbird",
+                nontech2: "Twenty thousand leagues under the seas",
+                nontech3: "The Mysterious Island",
+                nontech4: "Captain Grant's children",
+                nontech5: "The Black Swan: The Impact of the Highly Improbable",
+                linksHeader: "Useful Links",
+                links1: "Lectures on C++ advanced flow,MIPT",
+                links2: "C++ basic course, MIPT",
+                links3: "C++ Master's course, MIPT",
+                links4: "C Language Practice",
+                links5: "C Programming",
+                assemblerHeader: "Assembler",
+                links6: "Assembler Course",
+                archHeader: "Computer architecture and OS",
+                links7: "Computer Architecture",
+                links8: "Computer architecture and OS basics",
+                links9: "OS Architecture",
+                moreHeader: "More",
+                links10: "Industrial Development Tools",
+                links11: "Computer science",
+                links12: "All mathematics",
+                links13: "Data structures and algorithms",
+                links14: "CS50 in Russian",
+                links15: "CS50 in English",
+                skillsHeader: "Skills",
+                skill1: "Programming Languages",
+                skill2: "Assembly",
+                skill3: "Systems Programming",
+                skill4: "Operating Systems",
+                skill5: "Computer Architecture",
+                skill6: "Low-level Optimization",
+                skill7: "Memory Management",
+                skill8: "Development Tools",
+                contactFooter: "For any questions, contact me on Discord: n1tch03"
+            },
+            ru: {
+                greeting: "Привет, я nitch",
+                interest: "👀 Я интересуюсь саморазвитием",
+                studying: "🌱 В настоящее время изучаю почти всё - низкоуровневые языки программирования, операционные системы, архитектуру компьютера, физику и многое другое",
+                contact: "📫 Если хотите связаться со мной, напишите мне в discord: n1tch03",
+                github: "🌚 Мой github:",
+                techTab: "Техническая литература",
+                nontechTab: "Не техническая литература",
+                linksTab: "Полезные ссылки",
+                skillsTab: "Навыки",
+                techHeader: "Техническая литература",
+                tech1: "Вся база программирования",
+                tech2: "Язык программирования C",
+                tech3: "Паттерны проектирования",
+                tech4: "Язык программирования C++",
+                tech5: "Операционные системы, архитектура компьютера, сети",
+                tech6: "Алгоритмы",
+                tech7: "Создание своего дистрибутива Linux",
+                tech8: "Физика",
+                nontechHeader: "Не техническая литература (которую я рекомендую к прочтению)",
+                nontech1: "Убить пересмешника",
+                nontech2: "Двадцать тысяч льё под водой",
+                nontech3: "Таинственный остров",
+                nontech4: "Дети капитана Гранта",
+                nontech5: "Чёрный лебедь. Под знаком непредсказуемости",
+                linksHeader: "Полезные ссылки",
+                links1: "Лекции по углублённому C++, МФТИ",
+                links2: "Базовый курс C++, МФТИ",
+                links3: "Магистерский курс C++, МФТИ",
+                links4: "Практика по языку C",
+                links5: "Программирование на C",
+                assemblerHeader: "Ассемблер",
+                links6: "Курс по ассемблеру",
+                archHeader: "Архитектура компьютера и ОС",
+                links7: "Архитектура компьютера",
+                links8: "Основы архитектуры компьютера и ОС",
+                links9: "Архитектура ОС",
+                moreHeader: "Другое",
+                links10: "Инструменты промышленной разработки",
+                links11: "Информатика",
+                links12: "Вся математика",
+                links13: "Структуры данных и алгоритмы",
+                links14: "CS50 на русском",
+                links15: "CS50 на английском",
+                skillsHeader: "Навыки",
+                skill1: "Языки программирования",
+                skill2: "Ассемблер",
+                skill3: "Системное программирование",
+                skill4: "Операционные системы",
+                skill5: "Архитектура компьютера",
+                skill6: "Низкоуровневая оптимизация",
+                skill7: "Управление памятью",
+                skill8: "Инструменты разработки",
+                contactFooter: "По любым вопросам пишите мне в Discord: n1tch03"
+            }
+        };
+
+        // Set default language
+        let currentLanguage = 'en';
+
+        // Function to change language
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    if (element.tagName === 'INPUT') {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            // Save language preference
+            localStorage.setItem('language', lang);
+            
+            // Update language switch position
+            const langSwitch = document.querySelector('.lang-switch input');
+            langSwitch.checked = (lang === 'ru');
+        }
+
+        // Toggle language between English and Russian
+        function toggleLanguage() {
+            const newLang = currentLanguage === 'en' ? 'ru' : 'en';
+            changeLanguage(newLang);
+        }
+
         // Tab functionality
         function openTab(evt, tabName) {
             var i, tabcontent, tabbuttons;
@@ -495,21 +655,30 @@
             localStorage.setItem('theme', isLight ? 'light' : 'dark');
         }
         
-        // Check for saved theme preference
+        // Check for saved preferences when page loads
         document.addEventListener('DOMContentLoaded', () => {
+            // Theme
             const savedTheme = localStorage.getItem('theme');
             const themeToggle = document.querySelector('.theme-switch input');
-            const icons = document.querySelectorAll('.theme-icon');
+            const themeIcons = document.querySelectorAll('.theme-icon');
             
             if (savedTheme === 'light') {
                 document.body.classList.add('light-theme');
                 themeToggle.checked = true;
-                icons[0].textContent = '🌙';
-                icons[1].textContent = '☀️';
+                themeIcons[0].textContent = '🌙';
+                themeIcons[1].textContent = '☀️';
             } else {
-                icons[0].textContent = '☀️';
-                icons[1].textContent = '🌙';
+                themeIcons[0].textContent = '☀️';
+                themeIcons[1].textContent = '🌙';
             }
+            
+            // Language
+            const savedLang = localStorage.getItem('language') || 'en';
+            changeLanguage(savedLang);
+            
+            // Set language switch position
+            const langSwitch = document.querySelector('.lang-switch input');
+            langSwitch.checked = (savedLang === 'ru');
         });
     </script>
 </body>
