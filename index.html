@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -78,6 +77,10 @@
             text-align: center;
             margin-bottom: 30px;
             position: relative;
+        }
+        
+        .header-content {
+            padding-bottom: 60px; /* Space for switchers */
         }
         
         h1 {
@@ -293,11 +296,15 @@
         /* Theme and language switcher */
         .switchers-container {
             position: absolute;
-            top: 0;
-            right: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
             align-items: center;
             gap: 15px;
+            padding: 10px 0;
+            width: 100%;
+            justify-content: center;
         }
         
         .theme-switcher, .lang-switcher {
@@ -383,6 +390,16 @@
             }
         }
         
+        /* About section styles */
+        .about-content {
+            line-height: 1.8;
+        }
+        
+        .about-content p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+        
         /* Mobile styles */
         @media (max-width: 768px) {
             .container {
@@ -417,10 +434,12 @@
             }
             
             .switchers-container {
-                position: static;
-                justify-content: center;
-                margin-top: 15px;
+                position: relative;
+                bottom: auto;
+                left: auto;
+                transform: none;
                 flex-direction: column;
+                margin-top: 15px;
                 gap: 10px;
             }
             
@@ -435,6 +454,10 @@
             li {
                 font-size: 1rem;
                 padding-left: 25px;
+            }
+            
+            .header-content {
+                padding-bottom: 20px;
             }
         }
         
@@ -453,165 +476,144 @@
                 font-size: 13px;
             }
         }
-    
-.controls {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-    display: flex;
-    gap: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 5px 10px;
-    border-radius: 8px;
-}
-.main-content {
-    padding-top: 80px;
-    padding-right: 140px;
-}
-
-@media (max-width: 600px) {
-    .controls {
-        top: 10px;
-        right: 10px;
-        flex-direction: column;
-        padding: 8px;
-    }
-
-    .main-content {
-        padding-right: 20px;
-        padding-left: 20px;
-        padding-top: 100px;
-    }
-}
-</style>
+    </style>
 </head>
 <body>
 <!-- Floating particles background -->
 <div class="particles" id="particles"></div>
 <div class="container">
 <header>
-<h1>👋 <span data-i18n="greeting">Hi, I'm nitch</span></h1>
-<div class="switchers-container">
-<div class="lang-switcher">
-<span class="lang-icon">en</span>
-<label class="lang-switch">
-<input onclick="toggleLanguage()" type="checkbox"/>
-<span class="lang-slider"></span>
-</label>
-<span class="lang-icon">ru</span>
-</div>
-<div class="theme-switcher">
-<span class="theme-icon">☀️</span>
-<label class="theme-switch">
-<input onclick="toggleTheme()" type="checkbox"/>
-<span class="theme-slider"></span>
-</label>
-<span class="theme-icon">🌙</span>
-</div>
-</div>
+    <div class="header-content">
+        <h1>👋 <span data-i18n="greeting">Hi, I'm nitch</span></h1>
+        <div class="switchers-container">
+            <div class="lang-switcher">
+                <span class="lang-icon">en</span>
+                <label class="lang-switch">
+                    <input onclick="toggleLanguage()" type="checkbox"/>
+                    <span class="lang-slider"></span>
+                </label>
+                <span class="lang-icon">ru</span>
+            </div>
+            <div class="theme-switcher">
+                <span class="theme-icon">☀️</span>
+                <label class="theme-switch">
+                    <input onclick="toggleTheme()" type="checkbox"/>
+                    <span class="theme-slider"></span>
+                </label>
+                <span class="theme-icon">🌙</span>
+            </div>
+        </div>
+    </div>
 </header>
 <div class="info">
-<p><span data-i18n="interest">👀 I'm interested in self-development</span></p>
-<p><span data-i18n="studying">🌱 I'm currently studying almost everything - low-level programming languages, operating systems, computer architecture, physics, and more</span></p>
-<p><span data-i18n="contact">📫 If you want to contact me, write to me in the discord: n1tch03</span></p>
-<p><span data-i18n="github">🌚 My github:</span> <a href="https://github.com/n1tch03" target="_blank">@n1tch03</a></p>
+    <p><span data-i18n="interest">👀 I'm interested in self-development</span></p>
+    <p><span data-i18n="studying">🌱 I'm currently studying almost everything - low-level programming languages, operating systems, computer architecture, physics, and more</span></p>
+    <p><span data-i18n="contact">📫 If you want to contact me, write to me in the discord: n1tch03</span></p>
+    <p><span data-i18n="github">🌚 My github:</span> <a href="https://github.com/n1tch03" target="_blank">@n1tch03</a></p>
 </div>
 <div class="tabs">
-<button class="tab active" data-i18n="techTab" onclick="openTab(event, 'tech')">Technical Literature</button>
-<button class="tab" data-i18n="nontechTab" onclick="openTab(event, 'nontech')">Non-Tech Literature</button>
-<button class="tab" data-i18n="linksTab" onclick="openTab(event, 'links')">Useful Links</button>
-<button class="tab" data-i18n="skillsTab" onclick="openTab(event, 'cv')">Skills</button>
+    <button class="tab active" data-i18n="aboutTab" onclick="openTab(event, 'about')">About This Site</button>
+    <button class="tab" data-i18n="techTab" onclick="openTab(event, 'tech')">Technical Literature</button>
+    <button class="tab" data-i18n="nontechTab" onclick="openTab(event, 'nontech')">Non-Tech Literature</button>
+    <button class="tab" data-i18n="linksTab" onclick="openTab(event, 'links')">Useful Links</button>
+    <button class="tab" data-i18n="skillsTab" onclick="openTab(event, 'cv')">Skills</button>
 </div>
-<div class="tab-content show" id="tech">
-<h2 data-i18n="techHeader">Technical Literature</h2>
-<ul>
-<li><strong data-i18n="tech1">The entire programming base</strong> – Андрей Столяров, Программирование: Введение в профессию</li>
-<li><strong data-i18n="tech2">C programming language</strong> - Brian Kernighan, Dennis Ritchie</li>
-<li><strong data-i18n="tech3">Patterns</strong> - Ralph Johnson, John Vlissides, Richard Helm, Erich Gamma, Patterns of object-oriented design</li>
-<li><strong data-i18n="tech4">C++ Programming Language</strong> - Bjarne Straustrup (Programming principles and Practice Using C++, The C++ Programming Language)</li>
-<li><strong data-i18n="tech5">Operating systems, computer architecture, networks</strong> - Andrew Tanenbaum</li>
-<li><strong data-i18n="tech6">Algorithms</strong> – Grokking Algorithms, Aditya Bhargava</li>
-<li><strong data-i18n="tech7">Building your Linux distribution</strong> – Linux From Scratch</li>
-<li><strong data-i18n="tech8">Physics</strong> – Ландсберг, Элементарный учебник по физике; Richard Feynman, The Feynman Lectures on Physics</li>
-</ul>
+<div class="tab-content show" id="about">
+    <h2 data-i18n="aboutHeader">About This Site</h2>
+    <div class="about-content">
+        <p data-i18n="aboutText1">This website is my digital space where I share useful material, my projects and thoughts. Here you can find a lot of both technical and non-technical literature that I recommend reading, useful links, my work and notes.</p>
+        <p data-i18n="aboutText3">Welcome!</p>
+    </div>
+</div>
+<div class="tab-content" id="tech">
+    <h2 data-i18n="techHeader">Technical Literature</h2>
+    <ul>
+        <li><strong data-i18n="tech1">The entire programming base</strong> – Андрей Столяров, Программирование: Введение в профессию</li>
+        <li><strong data-i18n="tech2">C programming language</strong> - Brian Kernighan, Dennis Ritchie</li>
+        <li><strong data-i18n="tech3">Patterns</strong> - Ralph Johnson, John Vlissides, Richard Helm, Erich Gamma, Patterns of object-oriented design</li>
+        <li><strong data-i18n="tech4">C++ Programming Language</strong> - Bjarne Straustrup (Programming principles and Practice Using C++, The C++ Programming Language)</li>
+        <li><strong data-i18n="tech5">Operating systems, computer architecture, networks</strong> - Andrew Tanenbaum</li>
+        <li><strong data-i18n="tech6">Algorithms</strong> – Grokking Algorithms, Aditya Bhargava</li>
+        <li><strong data-i18n="tech7">Building your Linux distribution</strong> – Linux From Scratch</li>
+        <li><strong data-i18n="tech8">Physics</strong> – Ландсберг, Элементарный учебник по физике; Richard Feynman, The Feynman Lectures on Physics</li>
+    </ul>
 </div>
 <div class="tab-content" id="nontech">
-<h2 data-i18n="nontechHeader">Non-technical literature</h2>
-<ul>
-<li><strong data-i18n="nontech1">To kill a Mockingbird</strong> - Harper Lee</li>
-<li><strong data-i18n="nontech2">Twenty thousand leagues under the seas</strong> - Jules Verne</li>
-<li><strong data-i18n="nontech3">The Mysterious Island</strong> - Jules Verne</li>
-<li><strong data-i18n="nontech4">Captain Grant's children</strong> - Jules Verne</li>
-<li><strong>Горе от ума</strong> - А.С. Грибоедов</li>
-<li><strong>Как начать новую жизнь в понедельник и не бросить во вторник</strong></li>
-<li><strong>Как начать думать в понедельник и не перестать во вторник</strong></li>
-<li><strong>Быть нельзя казаться</strong></li>
-<li><strong data-i18n="nontech5">The Black Swan: The Impact of the Highly Improbable</strong> - Nassim Nicholas Taleb</li>
-</ul>
+    <h2 data-i18n="nontechHeader">Non-technical literature</h2>
+    <ul>
+        <li><strong data-i18n="nontech1">To kill a Mockingbird</strong> - Harper Lee</li>
+        <li><strong data-i18n="nontech2">Twenty thousand leagues under the seas</strong> - Jules Verne</li>
+        <li><strong data-i18n="nontech3">The Mysterious Island</strong> - Jules Verne</li>
+        <li><strong data-i18n="nontech4">Captain Grant's children</strong> - Jules Verne</li>
+        <li><strong>Горе от ума</strong> - А.С. Грибоедов</li>
+        <li><strong>Как начать новую жизнь в понедельник и не бросить во вторник</strong></li>
+        <li><strong>Как начать думать в понедельник и не перестать во вторник</strong></li>
+        <li><strong>Быть нельзя казаться</strong></li>
+        <li><strong data-i18n="nontech5">The Black Swan: The Impact of the Highly Improbable</strong> - Nassim Nicholas Taleb</li>
+    </ul>
 </div>
 <div class="tab-content" id="links">
-<h2 data-i18n="linksHeader">Useful Links</h2>
-<h3>C++</h3>
-<ul>
-<li><a data-i18n="links1" href="https://www.youtube.com/playlist?list=PLmSYEYYGhnBviRYhIDty-CSTDS16a3whl" target="_blank">Lectures on C++ advanced flow,MIPT</a></li>
-<li><a data-i18n="links2" href="https://www.youtube.com/playlist?list=PL3BR09unfgciJ1_K_E914nohpiOiHnpsK" target="_blank">C++ basic course, MIPT</a></li>
-<li><a data-i18n="links3" href="https://www.youtube.com/playlist?list=PL3BR09unfgcgf7R88ZQRQqWOdLy4pRW2h" target="_blank">C++ Master's course, MIPT</a></li>
-</ul>
-<h3>C</h3>
-<ul>
-<li><a data-i18n="links4" href="https://www.youtube.com/playlist?list=PL3BR09unfgchRxdDws74aY4mlSk9eYGEs" target="_blank">C Language Practice</a></li>
-<li><a data-i18n="links5" href="https://www.youtube.com/playlist?list=PLA0M1Bcd0w8w-mqVmBjt-2J8Z1gVmPZVz" target="_blank">C Programming</a></li>
-</ul>
-<h3 data-i18n="assemblerHeader">Assembler</h3>
-<ul>
-<li><a data-i18n="links6" href="https://www.youtube.com/playlist?list=PLlheCABZdy3P1OUheSoV4CeRvna5kleB-" target="_blank">Assembler Course</a></li>
-</ul>
-<h3 data-i18n="archHeader">Computer architecture and OS</h3>
-<ul>
-<li><a data-i18n="links7" href="https://youtube.com/playlist?list=PLnseyzyGdZdfv8H7LkvyVVE33fbBZaSdH" target="_blank">Computer Architecture</a></li>
-<li><a data-i18n="links8" href="https://www.youtube.com/playlist?list=PL-_cKNuVAYAV5FX84ZRvFN2ICTuQWBOJB" target="_blank">Computer architecture and OS basics</a></li>
-<li><a data-i18n="links9" href="https://www.youtube.com/playlist?list=PLlb7e2G7aSpT4SMpYl6uVYi13k0k9CBiq" target="_blank">OS Architecture</a></li>
-</ul>
-<h3 data-i18n="moreHeader">More</h3>
-<ul>
-<li><a data-i18n="links10" href="http://youtube.com/playlist?list=PLEqoHzpnmTfBlJGjG_2QqKRrXG36TkjNB" target="_blank">Industrial Development Tools</a></li>
-<li><a data-i18n="links11" href="https://www.youtube.com/@VladimirMozhenkov/playlists" target="_blank">Computer science</a></li>
-<li><a data-i18n="links12" href="https://www.youtube.com/@dudvstud9081/playlists" target="_blank">All mathematics</a></li>
-<li><a data-i18n="links13" href="https://docs.google.com/document/d/1U-XBUSU1PMwn7DL_nks2nUmyPSiDDdSpmTF9Ec_7MSU/edit?tab=t.0" target="_blank">Data structures and algorithms</a></li>
-<li><a data-i18n="links14" href="https://www.youtube.com/watch?v=Sy_wba7l1UU&amp;list=PLawfWYMUziZqyUL5QDLVbe3j5BKWj42E5" target="_blank">CS50 in Russian</a></li>
-<li><a data-i18n="links15" href="https://www.youtube.com/watch?v=3LPJfIKxwWc&amp;list=PLhQjrBD2T381WAHyx1pq-sBfykqMBI7V4" target="_blank">CS50 in English</a></li>
-</ul>
+    <h2 data-i18n="linksHeader">Useful Links</h2>
+    <h3>C++</h3>
+    <ul>
+        <li><a data-i18n="links1" href="https://www.youtube.com/playlist?list=PLmSYEYYGhnBviRYhIDty-CSTDS16a3whl" target="_blank">Lectures on C++ advanced flow,MIPT</a></li>
+        <li><a data-i18n="links2" href="https://www.youtube.com/playlist?list=PL3BR09unfgciJ1_K_E914nohpiOiHnpsK" target="_blank">C++ basic course, MIPT</a></li>
+        <li><a data-i18n="links3" href="https://www.youtube.com/playlist?list=PL3BR09unfgcgf7R88ZQRQqWOdLy4pRW2h" target="_blank">C++ Master's course, MIPT</a></li>
+    </ul>
+    <h3>C</h3>
+    <ul>
+        <li><a data-i18n="links4" href="https://www.youtube.com/playlist?list=PL3BR09unfgchRxdDws74aY4mlSk9eYGEs" target="_blank">C Language Practice</a></li>
+        <li><a data-i18n="links5" href="https://www.youtube.com/playlist?list=PLA0M1Bcd0w8w-mqVmBjt-2J8Z1gVmPZVz" target="_blank">C Programming</a></li>
+    </ul>
+    <h3 data-i18n="assemblerHeader">Assembler</h3>
+    <ul>
+        <li><a data-i18n="links6" href="https://www.youtube.com/playlist?list=PLlheCABZdy3P1OUheSoV4CeRvna5kleB-" target="_blank">Assembler Course</a></li>
+    </ul>
+    <h3 data-i18n="archHeader">Computer architecture and OS</h3>
+    <ul>
+        <li><a data-i18n="links7" href="https://youtube.com/playlist?list=PLnseyzyGdZdfv8H7LkvyVVE33fbBZaSdH" target="_blank">Computer Architecture</a></li>
+        <li><a data-i18n="links8" href="https://www.youtube.com/playlist?list=PL-_cKNuVAYAV5FX84ZRvFN2ICTuQWBOJB" target="_blank">Computer architecture and OS basics</a></li>
+        <li><a data-i18n="links9" href="https://www.youtube.com/playlist?list=PLlb7e2G7aSpT4SMpYl6uVYi13k0k9CBiq" target="_blank">OS Architecture</a></li>
+    </ul>
+    <h3 data-i18n="moreHeader">More</h3>
+    <ul>
+        <li><a data-i18n="links10" href="http://youtube.com/playlist?list=PLEqoHzpnmTfBlJGjG_2QqKRrXG36TkjNB" target="_blank">Industrial Development Tools</a></li>
+        <li><a data-i18n="links11" href="https://www.youtube.com/@VladimirMozhenkov/playlists" target="_blank">Computer science</a></li>
+        <li><a data-i18n="links12" href="https://www.youtube.com/@dudvstud9081/playlists" target="_blank">All mathematics</a></li>
+        <li><a data-i18n="links13" href="https://docs.google.com/document/d/1U-XBUSU1PMwn7DL_nks2nUmyPSiDDdSpmTF9Ec_7MSU/edit?tab=t.0" target="_blank">Data structures and algorithms</a></li>
+        <li><a data-i18n="links14" href="https://www.youtube.com/watch?v=Sy_wba7l1UU&amp;list=PLawfWYMUziZqyUL5QDLVbe3j5BKWj42E5" target="_blank">CS50 in Russian</a></li>
+        <li><a data-i18n="links15" href="https://www.youtube.com/watch?v=3LPJfIKxwWc&amp;list=PLhQjrBD2T381WAHyx1pq-sBfykqMBI7V4" target="_blank">CS50 in English</a></li>
+    </ul>
 </div>
 <div class="tab-content" id="cv">
-<h2 data-i18n="skillsHeader">Skills</h2>
-<div class="cv-section">
-<div class="skills-grid">
-<div class="skill-category">
-<h4 data-i18n="skill1">Programming Languages</h4>
-<div class="skill-item">C</div>
-<div class="skill-item">C++</div>
-<div class="skill-item" data-i18n="skill2">Assembly</div>
-</div>
-<div class="skill-category">
-<h4 data-i18n="skill3">Systems Programming</h4>
-<div class="skill-item" data-i18n="skill4">Operating Systems</div>
-<div class="skill-item" data-i18n="skill5">Computer Architecture</div>
-<div class="skill-item" data-i18n="skill6">Low-level Optimization</div>
-<div class="skill-item" data-i18n="skill7">Memory Management</div>
-</div>
-<div class="skill-category">
-<h4 data-i18n="skill8">Development Tools</h4>
-<div class="skill-item">Linux</div>
-<div class="skill-item">Git</div>
-<div class="skill-item">GDB</div>
-<div class="skill-item">Make/CMake</div>
-</div>
-</div>
-</div>
+    <h2 data-i18n="skillsHeader">Skills</h2>
+    <div class="cv-section">
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h4 data-i18n="skill1">Programming Languages</h4>
+                <div class="skill-item">C</div>
+                <div class="skill-item">C++</div>
+                <div class="skill-item" data-i18n="skill2">Assembly</div>
+            </div>
+            <div class="skill-category">
+                <h4 data-i18n="skill3">Systems Programming</h4>
+                <div class="skill-item" data-i18n="skill4">Operating Systems</div>
+                <div class="skill-item" data-i18n="skill5">Computer Architecture</div>
+                <div class="skill-item" data-i18n="skill6">Low-level Optimization</div>
+                <div class="skill-item" data-i18n="skill7">Memory Management</div>
+            </div>
+            <div class="skill-category">
+                <h4 data-i18n="skill8">Development Tools</h4>
+                <div class="skill-item">Linux</div>
+                <div class="skill-item">Git</div>
+                <div class="skill-item">GDB</div>
+                <div class="skill-item">Make/CMake</div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="contact">
-<p data-i18n="contactFooter">For any questions, contact me on Discord: n1tch03</p>
+    <p data-i18n="contactFooter">For any questions, contact me on Discord: n1tch03</p>
 </div>
 </div>
 <script>
@@ -623,10 +625,14 @@
                 studying: "🌱 I'm currently studying almost everything - low-level programming languages, operating systems, computer architecture, physics, and more",
                 contact: "📫 If you want to contact me, write to me in the discord: n1tch03",
                 github: "🌚 My github:",
+                aboutTab: "About This Site",
                 techTab: "Technical Literature",
                 nontechTab: "Non-Tech Literature",
                 linksTab: "Useful Links",
                 skillsTab: "Skills",
+                aboutHeader: "About This Site",
+                aboutText1: "This website is my digital space where I share useful material, my projects and thoughts. Here you can find a lot of both technical and non-technical literature that I recommend reading, useful links, my work and notes.",
+                aboutText3: "Welcome!",
                 techHeader: "Technical Literature",
                 tech1: "The entire programming base",
                 tech2: "C programming language",
@@ -678,10 +684,14 @@
                 studying: "🌱 В настоящее время изучаю почти всё - низкоуровневые языки программирования, операционные системы, архитектуру компьютера, физику и многое другое",
                 contact: "📫 Если хотите связаться со мной, напишите мне в discord: n1tch03",
                 github: "🌚 Мой github:",
+                aboutTab: "О сайте",
                 techTab: "Техническая литература",
                 nontechTab: "Не техническая литература",
                 linksTab: "Полезные ссылки",
                 skillsTab: "Навыки",
+                aboutHeader: "О сайте",
+                aboutText1: "Этот сайт - мое цифровое пространство, где я делюсь полезными материалами, своими проектами и мыслями. Здесь вы найдете много как технической, так и не технической литературы, которую я рекомендую к прочтению, полезные ссылки, мои работы и заметки.",
+                aboutText3: "Добро пожаловать!",
                 techHeader: "Техническая литература",
                 tech1: "Вся база программирования",
                 tech2: "Язык программирования C",
