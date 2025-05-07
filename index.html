@@ -633,6 +633,61 @@
 </div>
 </div>
 <script>
+        // Drag & Drop вкладок только для мобильных устройств
+    function isMobile() {
+        return window.innerWidth <= 768;
+    }
+
+    function enableMobileTabDragging() {
+        const tabsContainer = document.querySelector('.tabs');
+        const tabs = document.querySelectorAll('.tab');
+
+        tabs.forEach(tab => {
+            tab.setAttribute('draggable', true);
+
+            tab.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', e.target.dataset.i18n || e.target.textContent);
+                e.dataTransfer.effectAllowed = 'move';
+                e.target.classList.add('dragging');
+            });
+
+            tab.addEventListener('dragend', (e) => {
+                e.target.classList.remove('dragging');
+            });
+        });
+
+        tabsContainer.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const dragging = document.querySelector('.dragging');
+            const afterElement = getDragAfterElement(tabsContainer, e.clientX);
+            if (afterElement == null) {
+                tabsContainer.appendChild(dragging);
+            } else {
+                tabsContainer.insertBefore(dragging, afterElement);
+            }
+        });
+
+        function getDragAfterElement(container, x) {
+            const draggableElements = [...container.querySelectorAll('.tab:not(.dragging)')];
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = x - box.left - box.width / 2;
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (isMobile()) {
+            enableMobileTabDragging();
+        }
+    });
+
+
         // Language translations
         const translations = {
             en: {
