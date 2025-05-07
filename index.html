@@ -61,7 +61,7 @@
         }
         
         .container {
-            max-width: 1200px; /* было: 900px */
+            max-width: 1225px; /* было: 900px */
             box-sizing: border-box;
             margin: 0 auto;
             padding: 20px;
@@ -528,6 +528,7 @@
     <button class="tab" data-i18n="linksTab" onclick="openTab(event, 'links')">Useful Links</button>
     <button class="tab" data-i18n="skillsTab" onclick="openTab(event, 'cv')">Skills</button>
     <button class="tab" data-i18n="projectsTab" onclick="openTab(event, 'projects')">Projects</button>
+    <button class="tab" data-i18n="notesTab" onclick="openTab(event, 'notes')">Notes</button>
 </div>
 
 <div class="tab-content show" id="about">
@@ -637,6 +638,20 @@
     </ul>
 </div>
 
+<div class="tab-content" id="notes">
+    <h2 data-i18n="notesHeader">My Notes</h2>
+    
+    <div class="note-section">
+        <h3 data-i18n="note1Title">The website has finally been created!</h3>
+        <div class="note-date" data-i18n="note1Date">Date: 08-05-2025</div>
+        <div class="note-content">
+            <p data-i18n="note1Content">after a few working nights, I finally finished the website. I have collected a lot of useful material here, use it, dear readers.</p>
+        </div>
+    </div>
+    
+    <!-- Будущие заметки можно добавлять сюда -->
+</div>
+
 <div class="contact">
     <p data-i18n="contactFooter">For any questions, contact me on Discord: n1tch03</p>
 </div>
@@ -709,6 +724,11 @@
                 skill11: "Working with networks",
                 about_project1: "a small website with useful materials and information about me (actually, you are currently on it).",
                 view_on_github: "View on GitHub", 
+                notesTab: "Notes",
+                notesHeader: "My Notes",
+                note1Title: "The website has finally been created!",
+                note1Date: "Date: 08-05-2025",
+                note1Content: "after a few working nights, I finally finished the website. I have collected a lot of useful material here. use it, dear readers.",
                 contactFooter: "For any questions, contact me on Discord: n1tch03"
             },
             ru: {
@@ -775,6 +795,11 @@
                 skill11: "Работа с сетями",
                 about_project1: "небольшой веб-сайт с полезными материалами и информацией обо мне (собственно, вы сейчас на нем находитесь).",
                 view_on_github: "Посмотреть на GitHub",
+                notesTab: "Заметки",
+                notesHeader: "Мои Заметки",
+                note1Title: "Сайт наконец-то создан!",
+                note1Date: "Дата: 08-05-2025",
+                note1Content: "спустя несколько рабочих ночей я, наконец то, закончил сайт. я собрал тут кучу полезного материала. пользуйтесь, дорогие читатели. ",
                 contactFooter: "По любым вопросам пишите мне в Discord: n1tch03"
             }
         };
