@@ -261,9 +261,9 @@
         }
         
         .skills-grid {
-            display: flex;
-            /*grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));*/
-            justify-content: space-evenly;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            /*justify-content: space-evenly;*/
             gap: 15px;
             margin-top: 15px;
         }
@@ -619,6 +619,12 @@
                 <div class="skill-item">GDB</div>
                 <div class="skill-item">Make/CMake</div>
             </div>
+            <div class="skill-category">
+                <h4 data-i18n="skill9">Other</h4>
+                <div class="skill-item">HTML/CSS</div>
+                <div class="skill-item" data-i18n="skill10">Algorithms and data structures</div>
+                <div class="skill-item" data-i18n="skill11">Working with networks</div>
+            </div>
         </div>
     </div>
 </div>
@@ -696,6 +702,9 @@
                 skill6: "Low-level Optimization",
                 skill7: "Memory Management",
                 skill8: "Development Tools",
+                skill9: "Other",
+                skill10: "Algorithms and data structures",
+                skill11: "Working with networks",
                 contactFooter: "For any questions, contact me on Discord: n1tch03"
             },
             ru: {
@@ -757,6 +766,9 @@
                 skill6: "Низкоуровневая оптимизация",
                 skill7: "Управление памятью",
                 skill8: "Инструменты разработки",
+                skill9: "Остальное",
+                skill10: "Алгоритмы и структуры данных",
+                skill11: "Работа с сетями",
                 contactFooter: "По любым вопросам пишите мне в Discord: n1tch03"
             }
         };
