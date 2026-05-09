@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Mathematics System Roadmap</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#000000;
+    --panel:#09090b;
+    --panel-2:#0d0d0e;
+
+    --border:rgba(255,255,255,0.045);
+    --border-hover:rgba(255,255,255,0.14);
+
+    --text:#f5f5f5;
+    --muted:#71717a;
+    --soft:#a1a1aa;
+
+    --accent:#d4d4d8;
+    --coffee:#6f6255;
+
+    --timeline:#232326;
+    --timeline-glow:#f4f4f5;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'JetBrains Mono', monospace;
+    overflow-x:hidden;
+    line-height:1.7;
+    position:relative;
+}
+
+/* GRAIN */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:0.045;
+    background-image:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.08) 0.4px, transparent 0.5px),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.06) 0.4px, transparent 0.5px);
+    background-size:7px 7px;
+    mix-blend-mode:overlay;
+}
+
+/* TOP STATUS BAR */
+
+.topbar{
+    position:sticky;
+    top:0;
+    z-index:999;
+    backdrop-filter:blur(12px);
+    background:rgba(0,0,0,0.75);
+    border-bottom:1px solid var(--border);
+}
+
+.topbar-inner{
+    width:min(1450px, 94%);
+    margin:auto;
+    height:52px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    color:var(--soft);
+    font-size:0.78rem;
+    letter-spacing:0.5px;
+}
+
+.dots{
+    display:flex;
+    gap:8px;
+}
+
+.dot{
+    width:8px;
+    height:8px;
+    background:#3f3f46;
+}
+
+/* HERO */
+
+.hero{
+    width:min(1450px, 94%);
+    margin:auto;
+    padding:90px 0 80px;
+}
+
+.system-label{
+    color:var(--muted);
+    margin-bottom:18px;
+    font-size:0.82rem;
+}
+
+.system-label span{
+    color:var(--soft);
+}
+
+.title{
+    font-size:clamp(2.5rem, 7vw, 6rem);
+    line-height:1;
+    letter-spacing:-4px;
+    margin-bottom:24px;
+}
+
+.subtitle{
+    max-width:850px;
+    color:var(--muted);
+    font-size:0.95rem;
+}
+
+/* ROADMAP */
+
+.roadmap{
+    width:min(1450px, 94%);
+    margin:auto;
+    position:relative;
+    padding-bottom:120px;
+}
+
+/* TIMELINE */
+
+.timeline{
+    position:absolute;
+    left:18px;
+    top:0;
+    width:1px;
+    height:100%;
+    background:
+    repeating-linear-gradient(
+        to bottom,
+        var(--timeline),
+        var(--timeline) 10px,
+        transparent 10px,
+        transparent 18px
+    );
+}
+
+.timeline::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to bottom,
+        transparent,
+        rgba(255,255,255,0.16),
+        transparent
+    );
+    animation:pulse 5s linear infinite;
+}
+
+@keyframes pulse{
+    0%{ transform:translateY(-20%);}
+    100%{ transform:translateY(100%);}
+}
+
+/* SECTIONS */
+
+.section{
+    position:relative;
+    margin-bottom:110px;
+    padding-left:70px;
+}
+
+.section-title{
+    margin-bottom:38px;
+    color:var(--accent);
+    font-size:0.95rem;
+    letter-spacing:1px;
+}
+
+.section-title span{
+    color:var(--muted);
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:20px;
+}
+
+/* CARD */
+
+.card{
+    position:relative;
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(255,255,255,0.02),
+        rgba(255,255,255,0.01)
+    );
+
+    backdrop-filter:blur(8px);
+
+    border:1px solid var(--border);
+
+    padding:24px;
+
+    overflow:hidden;
+
+    transition:
+    all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    min-height:210px;
+}
+
+/* CORNER BRACKETS */
+
+.card::before,
+.card::after{
+    content:"";
+    position:absolute;
+    width:16px;
+    height:16px;
+    border-color:rgba(255,255,255,0.14);
+    transition:all 0.5s cubic-bezier(0.2,0.8,0.2,1);
+}
+
+.card::before{
+    top:10px;
+    left:10px;
+    border-top:1px solid;
+    border-left:1px solid;
+}
+
+.card::after{
+    bottom:10px;
+    right:10px;
+    border-bottom:1px solid;
+    border-right:1px solid;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+
+    border-color:var(--border-hover);
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(255,255,255,0.03),
+        rgba(255,255,255,0.015)
+    );
+
+    box-shadow:
+    0 30px 80px rgba(0,0,0,0.65),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+.card:hover::before,
+.card:hover::after{
+    border-color:rgba(255,255,255,0.35);
+}
+
+/* CARD CONTENT */
+
+.index{
+    color:var(--accent);
+    font-size:0.8rem;
+    margin-bottom:18px;
+}
+
+.book{
+    font-size:1rem;
+    margin-bottom:16px;
+    line-height:1.55;
+}
+
+.author{
+    color:var(--muted);
+    font-size:0.9rem;
+    margin-bottom:24px;
+}
+
+.meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.tag{
+    border:1px solid rgba(255,255,255,0.06);
+    padding:5px 10px;
+    color:var(--soft);
+    font-size:0.72rem;
+    background:rgba(255,255,255,0.015);
+}
+
+.divider{
+    margin-top:20px;
+    color:#2f2f34;
+    font-size:0.8rem;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+/* FOOTER */
+
+.footer{
+    width:min(1450px,94%);
+    margin:auto;
+    padding:40px 0 100px;
+    border-top:1px solid var(--border);
+    color:#555;
+    font-size:0.8rem;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .section{
+        padding-left:48px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .title{
+        letter-spacing:-2px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+    <div class="topbar-inner">
+
+        <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+
+        <div>
+            mathematics-roadmap.service ➔ active
+        </div>
+
+        <div>
+            uptime: 271d 04h 21m
+        </div>
+
+    </div>
+</div>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="system-label">
+┌─ system.boot :: <span>mathematics-learning-track</span>
+</div>
+
+<h1 class="title">
+Mathematics<br>
+Roadmap
+</h1>
+
+<p class="subtitle">
+Минималистичный интерактивный трек изучения математики:
+от школьной базы и геометрии до олимпиадных задач,
+математического анализа, логики и абстрактной алгебры.
+</p>
+
+</section>
+
+<!-- ROADMAP -->
+
+<div class="roadmap">
+
+<div class="timeline"></div>
+
+<!-- SCHOOL -->
+
+<section class="section">
+
+<div class="section-title">
+[ LVL-1 ] ── ШКОЛЬНЫЙ УРОВЕНЬ
+<span>....................................</span>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<div class="index">01 // [MATH]</div>
+<div class="book">
+Алгебра и начала математического анализа 10–11
+</div>
+<div class="author">
+Мерзляк
+</div>
+<div class="meta">
+<div class="tag">FOUNDATION</div>
+<div class="tag">ALGEBRA</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">02 // [COMB]</div>
+<div class="book">
+Комбинаторика
+</div>
+<div class="author">
+Виленкин
+</div>
+<div class="meta">
+<div class="tag">BASIC</div>
+<div class="tag">DISCRETE</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">03 // [LOGIC]</div>
+<div class="book">
+Простейшие примеры математических доказательств
+</div>
+<div class="author">
+Успенский
+</div>
+<div class="meta">
+<div class="tag">PROOFS</div>
+<div class="tag">INTRO</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">04 // [EXAM]</div>
+<div class="book">
+Математика абитуриенту
+</div>
+<div class="author">
+Ткачук
+</div>
+<div class="meta">
+<div class="tag">PRACTICE</div>
+<div class="tag">BASE</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">05 // [GEOM]</div>
+<div class="book">
+Геометрия. Планиметрия. Задачник
+</div>
+<div class="author">
+Гордин
+</div>
+<div class="meta">
+<div class="tag">GEOMETRY</div>
+<div class="tag">SCHOOL</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">06 // [EGE]</div>
+<div class="book">
+ЕГЭ: Планиметрия и стереометрия
+</div>
+<div class="author">
+Гордин
+</div>
+<div class="meta">
+<div class="tag">EXAM</div>
+<div class="tag">GEOMETRY</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- OLYMPIAD -->
+
+<section class="section">
+
+<div class="section-title">
+[ LVL-2 ] ── ПОДГОТОВКА К ОЛИМПИАДАМ
+<span>............................</span>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<div class="index">07 // [LOGIC]</div>
+<div class="book">
+Логические задачи
+</div>
+<div class="author">
+Раскина и Шноль
+</div>
+<div class="meta">
+<div class="tag">LOGIC</div>
+<div class="tag">THINKING</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">08 // [NUM]</div>
+<div class="book">
+Азы теории чисел
+</div>
+<div class="author">
+Кноп
+</div>
+<div class="meta">
+<div class="tag">NUMBER THEORY</div>
+<div class="tag">INTRO</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">09 // [NUM]</div>
+<div class="book">
+Делимость и простые числа
+</div>
+<div class="author">
+Сгибнев
+</div>
+<div class="meta">
+<div class="tag">PRIMES</div>
+<div class="tag">DIVISIBILITY</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">10 // [ALG]</div>
+<div class="book">
+Алгебра и теория чисел
+</div>
+<div class="author">
+Алфутова
+</div>
+<div class="meta">
+<div class="tag">ADVANCED</div>
+<div class="tag">ALGEBRA</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">11 // [ANL]</div>
+<div class="book">
+Последовательности
+</div>
+<div class="author">
+Блинков
+</div>
+<div class="meta">
+<div class="tag">ANALYSIS</div>
+<div class="tag">SEQUENCES</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">12 // [ANL]</div>
+<div class="book">
+Непрерывность
+</div>
+<div class="author">
+Блинков
+</div>
+<div class="meta">
+<div class="tag">CONTINUITY</div>
+<div class="tag">ANALYSIS</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">13 // [GEOM]</div>
+<div class="book">
+Элементарная геометрия
+</div>
+<div class="author">
+Понарин
+</div>
+<div class="meta">
+<div class="tag">PROOFS</div>
+<div class="tag">GEOMETRY</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">14 // [3D]</div>
+<div class="book">
+Задачи по стереометрии
+</div>
+<div class="author">
+Прасолов
+</div>
+<div class="meta">
+<div class="tag">STEREOMETRY</div>
+<div class="tag">ADVANCED</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">15 // [GRAPH]</div>
+<div class="book">
+Теория графов
+</div>
+<div class="author">
+Гуровиц, Хобрина
+</div>
+<div class="meta">
+<div class="tag">GRAPHS</div>
+<div class="tag">DISCRETE</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">16 // [META]</div>
+<div class="book">
+Как решают нестандартные задачи
+</div>
+<div class="author">
+Канель-Белов
+</div>
+<div class="meta">
+<div class="tag">PROBLEM SOLVING</div>
+<div class="tag">OLYMPIAD</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">17 // [OLY]</div>
+<div class="book">
+Сборник олимпиадных задач по математике
+</div>
+<div class="author">
+Горбачев
+</div>
+<div class="meta">
+<div class="tag">OLYMPIAD</div>
+<div class="tag">PROBLEMS</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">18 // [MSK]</div>
+<div class="book">
+Московские математические олимпиады
+</div>
+<div class="author">
+Сборники задач
+</div>
+<div class="meta">
+<div class="tag">MOSCOW</div>
+<div class="tag">ADVANCED</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">19 // [LOMO]</div>
+<div class="book">
+Олимпиада школьников «Ломоносов»
+</div>
+<div class="author">
+Сборники задач
+</div>
+<div class="meta">
+<div class="tag">UNIVERSITY</div>
+<div class="tag">EXAMS</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">20 // [PRS]</div>
+<div class="book">
+Задачи по алгебре, арифметике и анализу
+</div>
+<div class="author">
+Прасолов
+</div>
+<div class="meta">
+<div class="tag">HARDCORE</div>
+<div class="tag">MATH</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">21 // [META]</div>
+<div class="book">
+Методички Яковлева
+</div>
+<div class="author">
+Яковлев
+</div>
+<div class="meta">
+<div class="tag">FINAL PRACTICE</div>
+<div class="tag">SYSTEM</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- UNIVERSITY -->
+
+<section class="section">
+
+<div class="section-title">
+[ LVL-3 ] ── УНИВЕРСИТЕТСКИЙ УРОВЕНЬ
+<span>..............................</span>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<div class="index">22 // [CALC]</div>
+<div class="book">
+Математический анализ
+</div>
+<div class="author">
+Зорич
+</div>
+<div class="meta">
+<div class="tag">CALCULUS</div>
+<div class="tag">UNIVERSITY</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">23 // [ALG]</div>
+<div class="book">
+Введение в алгебру
+</div>
+<div class="author">
+Кострикин
+</div>
+<div class="meta">
+<div class="tag">ABSTRACT</div>
+<div class="tag">ALGEBRA</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">24 // [VIN]</div>
+<div class="book">
+Курс алгебры
+</div>
+<div class="author">
+Винберг
+</div>
+<div class="meta">
+<div class="tag">HIGHER ALGEBRA</div>
+<div class="tag">THEORY</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">25 // [SET]</div>
+<div class="book">
+Математическая логика и теория алгоритмов:
+Начала теории множеств
+</div>
+<div class="author">
+Учебный курс
+</div>
+<div class="meta">
+<div class="tag">SET THEORY</div>
+<div class="tag">LOGIC</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">26 // [FORM]</div>
+<div class="book">
+Математическая логика и теория алгоритмов:
+Языки исчисления
+</div>
+<div class="author">
+Учебный курс
+</div>
+<div class="meta">
+<div class="tag">FORMAL SYSTEMS</div>
+<div class="tag">LOGIC</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+<div class="card">
+<div class="index">27 // [COMP]</div>
+<div class="book">
+Математическая логика и теория алгоритмов:
+Вычислимые функции
+</div>
+<div class="author">
+Учебный курс
+</div>
+<div class="meta">
+<div class="tag">COMPUTABILITY</div>
+<div class="tag">CS THEORY</div>
+</div>
+<div class="divider">
+────────────────────────────────────
+</div>
+</div>
+
+</div>
+</section>
+
+</div>
+
+<footer class="footer">
+└─ roadmap.rendered :: success • nitch
+</footer>
+
+</body>
+</html>
